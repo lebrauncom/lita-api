@@ -34,7 +34,8 @@ module Lita
         end
 
         def format_as_slack_code(text)
-          ['```',text,'```'].join('\n')
+          ['```',text,'```'].join('
+')
         end
 
         def call_api(query)

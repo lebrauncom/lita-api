@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-api"
-  spec.version       = "0.1.1"
+  spec.version       = "0.1.2"
   spec.authors       = ["lebrauncom"]
   spec.email         = ["lebraun.com@gmail.com"]
   spec.description   = ""

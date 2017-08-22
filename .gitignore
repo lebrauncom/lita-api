@@ -9,6 +9,7 @@ _yardoc
 coverage
 doc/
 dump.rdb
+dump.rdb
 lib/bundler/man
 lita_config.rb
 pkg

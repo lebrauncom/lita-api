@@ -2,8 +2,7 @@ module Lita
   module Handlers
     class Api < Handler
       config :api_key, required: true
-
-      URL = 'http://api.venture360.dev:3000/v1/venturebot'
+      config :api_url, required: true
 
       route(/^api\s+(.+)/, :reply, command: true, help: {
         "api" => "Returns a JSON representation of the API query."
@@ -21,6 +20,10 @@ module Lita
           Lita.config.handlers.api.api_key
         end
 
+        def api_url
+          Lita.config.handlers.api.api_url
+        end
+
         def format_reply(response)
           begin
             body_hash = MultiJson.load(response.body)
@@ -36,8 +39,10 @@ module Lita
 
         def call_api(query)
           payload = {api_key: api_key, query: query}
-          http.post(URL, payload)
+          http.post(api_url, payload)
         end
+
+
 
       Lita.register_handler(self)
     end

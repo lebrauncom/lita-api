@@ -4,7 +4,7 @@ module Lita
       config :api_key, required: true
       config :api_url, required: true
 
-      route(/^api\s+(.+)/, :reply, command: true, help: {
+      route(/^api|_\s+(.+)/, :reply, command: true, help: {
         "api" => "Returns a JSON representation of the API query."
       })
 

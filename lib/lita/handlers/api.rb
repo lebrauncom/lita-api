@@ -27,8 +27,17 @@ module Lita
         def format_reply(response)
           begin
             body_hash = MultiJson.load(response.body)
-            format_as_slack_code(body_hash.map{|k,v| "#{k}: #{v}"}.flatten)
-          rescue
+
+            if body_hash['response'] # did not return an Array or Hash
+              if body_hash['response'].is_a?(String)
+                format_as_slack_code("=> \"#{body_hash['response']}\"")
+              else # Numbers
+                format_as_slack_code("=> #{body_hash['response']}")
+              end
+            else # Array or Hash
+              format_as_slack_code(body_hash.map{|k,v| "#{k}: #{v}"}.flatten)
+            end
+          rescue # Catch all
             format_as_slack_code("=> #{response.body}")
           end
         end
@@ -42,8 +51,6 @@ module Lita
           payload = {api_key: api_key, query: query}
           http.post(api_url, payload)
         end
-
-
 
       Lita.register_handler(self)
     end
